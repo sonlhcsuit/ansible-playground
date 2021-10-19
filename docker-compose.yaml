@@ -1,24 +1,38 @@
 version: "3.9"
 services:
+  jenkins:
+    build: 
+      context: .
+      dockerfile: ./docker/jenkins.Dockerfile
+    ports:
+      - 8080:8080
+      - 50000:50000
+    # volumes:
+    #   - 
   ansible:
     build: 
       context: .
-      dockerfile: ansible.Dockerfile
+      dockerfile: ./docker/ansible.Dockerfile
+    volumes:
+        - ./ansible:/ans-file
     expose:
       - "22"
-  # web:
-  #   build:
-  #     contex
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/alpine.Dockerfile
+    expose:
+      - "22"
   mongo:
     build: 
       context: .
-      dockerfile: centos.Dockerfile 
+      dockerfile: ./docker/centos.Dockerfile 
     expose: 
       - "22"
 
   mysql:
     build:
       context: .
-      dockerfile: alpine.Dockerfile
+      dockerfile: ./docker/ubuntu.Dockerfile
     expose:
       - "22"
