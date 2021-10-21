@@ -6,10 +6,10 @@ RUN apt-add-repository --yes --update ppa:ansible/ansible
 RUN apt-get install -y ansible iputils-ping python-apt vim tree \
     curl
 
-ADD id_rsa /root
+COPY ssh-key /root
 RUN cd /root && mkdir /root/.ssh/
-RUN cp /root/id_rsa /root/.ssh/
-RUN chmod 400 /root/.ssh/id_rsa
-RUN chmod 400 /root/id_rsa
+RUN cp /root/ssh-key /root/.ssh/
+RUN chmod 400 /root/.ssh/ssh-key
+RUN chmod 400 /root/ssh-key
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
