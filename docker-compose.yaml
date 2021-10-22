@@ -31,16 +31,16 @@ services:
     ports:
       - 6000:6000 
 
-  # mongo:
-  #   build: 
-  #     context: .
-  #     dockerfile: ./docker/centos.Dockerfile 
-  #   expose: 
-  #     - "22"
+  mongo:
+    build: 
+      context: .
+      dockerfile: ./docker/centos.Dockerfile 
+    expose: 
+      - 22
 
-  # mysql:
-  #   build:
-  #     context: .
-  #     dockerfile: ./docker/ubuntu.Dockerfile
-  #   expose:
-  #     - "22"
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/ubuntu.Dockerfile
+    expose:
+      - 22

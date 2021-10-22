@@ -1,5 +1,6 @@
 all:
   hosts:
-    web:
-    mongo:
+    children:
+      db:
+        mongo:
     mysql:
