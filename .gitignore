@@ -1,2 +1,4 @@
 id_rsa*
 jenkins_home/
+jk_home/
+jobs

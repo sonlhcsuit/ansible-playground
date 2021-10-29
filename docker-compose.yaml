@@ -9,40 +9,53 @@ services:
   #       - ./ansible:/ans-file
   #   expose:
   #     - "22"
+
   jenkins-lb:
-    
-  jenkins-master-active:
-    build: 
-      context: .
-      dockerfile: ./docker/jenkins.Dockerfile
-    volumes:
-    - ./jenkins_home:/var/jenkins_home
-    expose:
-      - 22
-    ports:
-      - 8080:8080
-      - 50000:50000
-
-  jenkins-master-passive:
-    build: 
-      context: .
-      dockerfile: ./docker/jenkins.Dockerfile
-    volumes:
-    - ./jenkins_home:/var/jenkins_home
-    expose:
-      - 22
-    ports:
-      - 8080:8080
-      - 50000:50000
-
-  jenkins-agent-py:
     build:
       context: .
-      dockerfile: ./docker/agent.python.Dockerfile
-    expose:
-      - 22
-    ports:
-      - 6000:6000 
+      dockerfile: ./docker/lb.Dockerfile
+    expose: 
+      - 8080
+    ports: 
+      - 5500:5500 
+
+  # jenkins-master-active:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/jenkins.Dockerfile
+  #   volumes:
+  #   # - ./jenkins_home:/var/jenkins_home  
+  #   # - ./jk_home:/var/jenkins_home
+  #   - ./jobs:/var/jenkins_home/jobs 
+  #   expose:
+  #     - 22
+  #     - 8080
+  #   ports:
+  #     - 8080:8080
+  #     - 50000:50000
+
+  # jenkins-master-passive:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/jenkins.Dockerfile
+  #   volumes:
+  #   - ./jobs:/var/jenkins_home/jobs 
+  #   expose:
+  #     - 22
+  #     - 8080
+  #   ports:
+  #     - 8081:8080
+  #     - 50001:50000
+
+  # jenkins-agent-py:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/agent.python.Dockerfile
+  #   expose:
+  #     - 22
+  #   ports:
+  #     - 6000:6000 
+
   # mongo:
   #   build: 
   #     context: .
