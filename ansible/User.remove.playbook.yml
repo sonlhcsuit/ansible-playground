@@ -1,0 +1,17 @@
+---
+- name: Create user
+  hosts: mongo
+  vars_prompt:
+
+    - name: username
+      prompt: Enter username
+      private: no
+      
+
+  tasks:
+
+    - name: "Remove user `{{ username }}`"
+      ansible.builtin.user:
+        name: "{{ username }}"
+        remove: yes
+        state: absent

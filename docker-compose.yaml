@@ -1,16 +1,29 @@
 version: "3.9"
 services:
 
-  ansible:
+  # ansible:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/ansible.Dockerfile
+  #   volumes:
+  #       - ./ansible:/ans-file
+  #   expose:
+  #     - "22"
+  jenkins-lb:
+    
+  jenkins-master-active:
     build: 
       context: .
-      dockerfile: ./docker/ansible.Dockerfile
+      dockerfile: ./docker/jenkins.Dockerfile
     volumes:
-        - ./ansible:/ans-file
+    - ./jenkins_home:/var/jenkins_home
     expose:
-      - "22"
-  
-  jenkins-master:
+      - 22
+    ports:
+      - 8080:8080
+      - 50000:50000
+
+  jenkins-master-passive:
     build: 
       context: .
       dockerfile: ./docker/jenkins.Dockerfile
@@ -30,17 +43,16 @@ services:
       - 22
     ports:
       - 6000:6000 
+  # mongo:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/centos.Dockerfile 
+  #   expose: 
+  #     - 22
 
-  mongo:
-    build: 
-      context: .
-      dockerfile: ./docker/centos.Dockerfile 
-    expose: 
-      - 22
-
-  mysql:
-    build:
-      context: .
-      dockerfile: ./docker/ubuntu.Dockerfile
-    expose:
-      - 22
+  # mysql:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/ubuntu.Dockerfile
+  #   expose:
+  #     - 22

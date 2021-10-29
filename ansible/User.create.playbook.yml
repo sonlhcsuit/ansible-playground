@@ -1,0 +1,31 @@
+---
+- name: Create user
+  hosts: mongo
+  vars_prompt:
+
+    - name: username
+      prompt: Enter username
+      private: no
+      
+    - name: password
+      prompt: Enter new password
+      private: yes
+      encrypt: sha512_crypt
+      salt: 7
+
+  tasks:
+
+    - name: Create new user with prompted "{{ username }}"
+      ansible.builtin.user:
+        name: "{{ username }}"
+        comment: Demo of sonlh6
+        shell: /bin/bash
+        # group: admin
+        home: "/Users/{{ username }}"
+        # update_password: on_create
+        password: "{{ password }}"
+        generate_ssh_key: yes
+        
+    # - name: Remove user with name `sonlh`
+    #   ansible.builtin.user:
+    #     name: sonlh

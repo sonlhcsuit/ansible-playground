@@ -1,0 +1,11 @@
+---
+- name: Update web servers
+  hosts: mongo
+  remote_user: zezy
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    ansible.builtin.file:
+      path: ~/demo
+      state: touch
+# authorized key

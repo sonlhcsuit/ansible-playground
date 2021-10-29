@@ -1,6 +1,4 @@
 all:
   hosts:
-    children:
-      db:
-        mongo:
+    mongo:
     mysql:
